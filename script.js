@@ -1,18 +1,16 @@
 
-
+// Get elements by id
 let search = document.getElementById("search");
 const ul = document.getElementById("auto-complete");
-const favarray = [];
+const favarray = []; // empty array to store heros details
 
-// Public Key = 811896283940264
+//PUBLIC KEY == 811896283940264 
 
+// Fetch data from super hero api to use our public key 
 search.onkeyup = function () {
   var searchname = search.value;
   if (searchname !== "") {
-    fetch(
-      "https://superheroapi.com/api.php/811896283940264/search/" +
-        searchname.trim()
-    )
+    fetch("https://superheroapi.com/api.php/811896283940264/search/" + searchname.trim())
       .then((response) => response.json())
       .then((data) => {
         ul.innerText = " ";
@@ -35,7 +33,7 @@ search.onkeyup = function () {
   }
 };
 
-
+// Display hero details
 function loadDetails(heroid) {
   fetch(`https://superheroapi.com/api.php/811896283940264/${heroid}`)
     .then((response) => response.json())
@@ -56,10 +54,10 @@ function loadDetails(heroid) {
       nature.innerText = "Nature: " + data.biography.alignment;
 
       var base = document.getElementById("base");
-      base.innerHTML = "add: " + data.add.base;
+      base.innerHTML = "Work: " + data.work.base;
 
       var occ = document.getElementById("occupation");
-      occ.innerHTML = "Occupation: " + data.add.occupation;
+      occ.innerHTML = "Occupation: " + data.work.occupation;
 
       var powestat = document.getElementById("powerstats");
       powestat.innerHTML =
